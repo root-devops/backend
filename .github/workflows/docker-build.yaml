@@ -18,7 +18,7 @@ jobs:
 
     - name: Set Docker tag with shortened SHA
       id: docker_tag
-      run: echo "::set-output name=tag::$(echo ${{ github.sha }} | head -c 8)"
+      run: echo "::set-output name=tag::$(echo ${{ github.sha }} | cut -c1-8)"
 
     - name: Build the Docker image
       run: docker build -t ${{ secrets.DOCKER_USERNAME }}/backend:${{ steps.docker_tag.outputs.tag }} .
